@@ -9,7 +9,7 @@ function Suggestions() {
     { name: "Alpha", img: "/baka.jfif" },
   ];
   return (
-    <div className="w-[100%] px-3">
+    <div className="px-3">
       <div className="flex mb-8 items-center justify-between bg-transparent border mt-4 rounded-md p3 relative ">
         <input
           type="text"

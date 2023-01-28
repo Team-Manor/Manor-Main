@@ -5,11 +5,17 @@ import Suggestions from "../components/Suggestions";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <div className="bg-[#f1f1f1] min-h-screen flex max-w-[1500px] mx-auto">
-      <Sidebar />
-      <Component {...pageProps} />
-      <div className="w-[375px]">
-        <Suggestions />
+    <div className="w-screen flex justify-center bg-[#f1f1f1] min-h-screen">
+      <div className="flex w-[1320px] mx-auto">
+        <div className="w-[30%]">
+          <Sidebar />
+        </div>
+        <div className="w-2/5">
+          <Component {...pageProps} />
+        </div>
+        <div className="w-[30%]">
+          <Suggestions />
+        </div>
       </div>
     </div>
   );
