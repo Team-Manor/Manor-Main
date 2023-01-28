@@ -8,7 +8,9 @@ function MyApp({ Component, pageProps }: AppProps) {
     <div className="bg-[#f1f1f1] min-h-screen flex max-w-[1500px] mx-auto">
       <Sidebar />
       <Component {...pageProps} />
-      <Suggestions />
+      <div className="w-[375px]">
+        <Suggestions />
+      </div>
     </div>
   );
 }
