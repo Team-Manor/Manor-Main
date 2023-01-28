@@ -15,17 +15,19 @@ const ProfilePage = () => {
   };
 
   return (
-    <div className="flex-grow border-l border-r min-w-[50%] sm:ml-[73px] xl:ml-[370px]">
+    <div className="border-l border-r w-full">
       <div className="flex items-center gap-4">
         <div className="hoverAnimation w-9 h-9 flex items-center justify-center xl:px-0">
           <ArrowSmallLeftIcon className="h-5" />
         </div>
         <div>
-          <h2 className="text-lg sm:text-xl font-bold">{wallet}</h2>
+          <h2 className="text-base sm:text-xl font-bold max-w-full overflow-hidden">
+            {wallet}
+          </h2>
           <p className="">0 posts</p>
         </div>
       </div>
-      <div className="w-[550px] h-[20vh] bg-slate-400"></div>
+      <div className="w-full h-[20vh] bg-slate-400"></div>
       <div className="flex justify-end items-center px-4 relative py-8">
         <div className="absolute left-4">
           <Image
