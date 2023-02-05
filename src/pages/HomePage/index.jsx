@@ -3,14 +3,15 @@ import BaseLayout from "../../Components/BaseLayout";
 import Feed from "./Components/Feed";
 import Navbar from "../../Components/Navbar";
 import Hero from "../../Components/Hero";
+import { useAccount } from "wagmi";
 
 function HomePage() {
   //created this fake boolean to control whether wallet is connected or not. replace with your own logic
-  const [metaMaskConnected, setMetaMaskConnected] = useState(true);
+  const { isConnected } = useAccount();
 
   return (
     <>
-      {metaMaskConnected ? (
+      {isConnected ? (
         <BaseLayout title="Home-Feeds">
           <Feed />
         </BaseLayout>

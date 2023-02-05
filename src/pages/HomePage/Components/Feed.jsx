@@ -1,6 +1,6 @@
 import { SparklesIcon } from "@heroicons/react/24/outline";
 import React from "react";
-// import Input from "../Components/Input";
+import Input from "./Input";
 // import Post from "../Components/Post";
 
 export default function Feed() {
@@ -31,7 +31,7 @@ export default function Feed() {
         </div>
       </div>
 
-      {/* <Input /> */}
+      <Input />
       {/* <div className="pb-72">
         {posts?.map((post) => (
           <Post

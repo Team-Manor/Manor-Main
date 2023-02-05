@@ -7,8 +7,7 @@ import {
 } from "@heroicons/react/24/outline";
 import React from "react";
 import { useRef, useState, useEffect, useContext } from "react";
-import { Picker } from "emoji-mart";
-import { AppContext } from "../context/AppContext";
+import { AppContext } from "../../../context/AppContext";
 
 function Input() {
   const [input, setInput] = useState("");
@@ -19,23 +18,12 @@ function Input() {
   const { contract } = useContext(AppContext);
   const filePickerRef = useRef(null);
 
-  const addEmoji = (e) => {
-    let sym = e.unified.split("-");
-    let codesArray = [];
-    sym.forEach((el) => codesArray.push("0x" + el));
-    let emoji = String.fromCodePoint(...codesArray);
-    setInput(input + emoji);
-  };
-
   const addImageToPost = async (e) => {
-    const reader = new FileReader();
-    setImage(e);
     if (e.target.files[0]) {
-      reader.readAsDataURL(e.target.files[0]);
+      console.log(e.target.files[0]);
+      setLoading(true);
+      setSelectedFile(URL.createObjectURL(e.target.files[0]));
     }
-    reader.onload = (readerEvent) => {
-      setSelectedFile(readerEvent.target.result);
-    };
   };
 
   return (
@@ -89,7 +77,7 @@ function Input() {
                 <ChartBarIcon className="text-[#1d9bf0] h-[22px]" />
               </div>
 
-              <div className="icon" onClick={() => setShowEmojis(!showEmojis)}>
+              <div className="icon">
                 <FaceSmileIcon className="text-[#1d9bf0] h-[22px]" />
               </div>
 

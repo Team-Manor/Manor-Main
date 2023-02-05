@@ -1,5 +1,5 @@
-// import { ConnectKitButton } from "connectkit";
 import React from "react";
+import { ConnectKitButton } from "connectkit";
 
 const Hero = ({ heading, message }) => {
   return (
@@ -10,7 +10,7 @@ const Hero = ({ heading, message }) => {
         <h2 className="text-5xl font-bold">{heading}</h2>
         <p className="py-5 text-xl">{message}</p>
 
-        {/* <ConnectKitButton /> */}
+        <ConnectKitButton label="Sign in" />
       </div>
     </div>
   );
