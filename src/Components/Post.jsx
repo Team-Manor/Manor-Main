@@ -1,8 +1,8 @@
 import {
-  ArrowsRightLeftIcon,
-  ChatBubbleOvalLeftEllipsisIcon,
+  CurrencyDollarIcon,
+  DocumentDuplicateIcon,
   CreditCardIcon,
-  EllipsisHorizontalCircleIcon,
+  ChatBubbleLeftIcon,
   HeartIcon,
   ShareIcon,
   TrashIcon,
@@ -11,95 +11,97 @@ import {
   HeartIcon as HeartIconFilled,
   ChatBubbleOvalLeftEllipsisIcon as ChatIconFilled,
 } from "@heroicons/react/24/solid";
+import { useAccount } from "wagmi";
+import axios from "axios";
+import { SendTransaction } from "./SendTransaction";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-function Post({ id, author, img, content, timestamp, postPage }) {
+function Post({
+  id,
+  author,
+  img,
+  content,
+  timestamp,
+  postPage,
+  contractAddress,
+  likeCount,
+  commentCount,
+}) {
   const [isOpen, setIsOpen] = useState(false);
   const [postId, setPostId] = useState(null);
   const [comments, setComments] = useState([]);
   const [likes, setLikes] = useState([]);
   const [liked, setLiked] = useState(false);
-  const router = useRouter();
-  const address = "0xa2";
+  const [show, setShow] = useState(false);
 
-  // useEffect(
-  //   () =>
-  //     onSnapshot(
-  //       query(
-  //         collection("posts", id, "comments"),
-  //         orderBy("timestamp", "desc")
-  //       ),
-  //       (snapshot) => setComments(snapshot.docs)
-  //     ),
-  //   [id]
-  // );
+  const { address, isConnected } = useAccount();
 
-  // useEffect(
-  //   () =>
-  //     onSnapshot(collection("posts", id, "likes"), (snapshot) =>
-  //       setLikes(snapshot.docs)
-  //     ),
-  //   [id]
-  // );
+  let time = "now";
 
-  const likePost = async () => {
-    if (liked) {
+  const getTimestamp = async () => {
+    const date = new Date(timestamp * 1000);
+    const today = new Date();
+
+    const diff = today - date;
+
+    const seconds = Math.floor(diff / 1000);
+
+    if (seconds < 60) {
+      time = `${seconds} seconds ago`;
+    } else if (seconds < 3600) {
+      time = `${Math.floor(seconds / 60)} minutes ago`;
+    } else if (seconds < 86400) {
+      time = `${Math.floor(seconds / 3600)} hours ago`;
     } else {
+      time = `${Math.floor(seconds / 86400)} days ago`;
     }
   };
 
-  const mint = async () => {
-    try {
-      const options = {
-        method: "POST",
-        url: "https://api.nftport.xyz/v0/mints/easy/urls",
-        headers: {
-          accept: "application/json",
-          "content-type": "application/json",
-          Authorization: "89b0800f-c97b-46bc-b7c4-c87bf895d0d6",
-        },
-        data: {
-          chain: "goerli",
-          name: content,
-          description: content,
-          file_url: `https://${img}.ipfs.w3s.link/a.jpeg`,
-          mint_to_address: address,
-        },
-      };
-    } catch (err) {
-      console.log(err);
-    }
+  getTimestamp();
+
+  const getContractAddress = async () => {
+    const options = {
+      method: "GET",
+      url: `https://api.nftport.xyz/v0/contracts/${contractAddress}`,
+      params: { chain: "goerli" },
+      headers: {
+        accept: "application/json",
+        Authorization: "5a7ab1f1-b76b-4434-85f4-06868427084c",
+      },
+    };
+
+    axios
+      .request(options)
+      .then(function (response) {
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        console.error(error);
+      });
   };
+
+  useEffect(() => {
+    getContractAddress();
+  }, [address]);
 
   return (
     <div className="p-3 flex cursor-pointer border-b">
-      {!postPage && (
-        <img src={img} alt="" className="h-11 w-11 rounded-full mr-4" />
-      )}
       <div className="flex flex-col space-y-2 w-full">
-        <div className={`flex ${!postPage && "justify-between"}`}>
+        <div className={`flex`}>
           {postPage && (
             <img
-              src={img}
+              src="https://www.shutterstock.com/image-vector/human-head-profile-black-shadow-600w-1208371933.jpg"
               alt="Profile Pic"
               className="h-11 w-11 rounded-full mr-4"
             />
           )}
           <div className="text-[#6e767d]">
             <div className="inline-block group">
-              <h4
-                className={`font-bold text-[15px] sm:text-base text-[#d9d9d9] group-hover:underline ${
-                  !postPage && "inline-block"
-                }`}
-              >
-                {author}
-              </h4>
-              <span
-                className={`text-sm sm:text-[15px] ${!postPage && "ml-1.5"}`}
-              >
-                @{author}
+              <span className={`text-sm sm:text-[15px]`}>
+                @{author.slice(0, 6)}
               </span>
             </div>
             ·{" "}
@@ -109,11 +111,14 @@ function Post({ id, author, img, content, timestamp, postPage }) {
               </p>
             )}
           </div>
-          <div className="hover:underline text-sm sm:text-[15px]">
-            {timestamp}
-          </div>
-          <div className="icon group flex-shrink-0 ml-auto">
-            <EllipsisHorizontalCircleIcon className="h-5 text-[#6e767d] group-hover:text-[#1d9bf0]" />
+          <div className="hover:underline text-sm sm:text-[15px]">{time}</div>
+          <div
+            className="icon group flex-shrink-0 ml-auto"
+            onClick={() => {
+              navigator.clipboard.writeText(contractAddress);
+            }}
+          >
+            <DocumentDuplicateIcon className="h-5 text-[#6e767d] group-hover:text-[#1d9bf0]" />
           </div>
         </div>
         {postPage && <p className="mt-0.5 text-lg">{content}</p>}
@@ -136,11 +141,11 @@ function Post({ id, author, img, content, timestamp, postPage }) {
             }}
           >
             <div className="icon group-hover:bg-[#1d9bf0] group-hover:bg-opacity-10">
-              <ChatBubbleOvalLeftEllipsisIcon className="h-5 group-hover:text-[#1d9bf0]" />
+              <ChatBubbleLeftIcon className="h-5 group-hover:text-[#1d9bf0]" />
             </div>
             {comments.length > 0 && (
               <span className="group-hover:text-[#1d9bf0] text-sm">
-                {comments.length}
+                {commentCount}
               </span>
             )}
           </div>
@@ -158,9 +163,26 @@ function Post({ id, author, img, content, timestamp, postPage }) {
             </div>
           ) : (
             <div className="flex items-center space-x-1 group">
-              <div className="icon group-hover:bg-green-500/10">
-                <ArrowsRightLeftIcon className="h-5 group-hover:text-green-500" />
+              <div
+                className="icon group-hover:bg-green-500/10"
+                onClick={() => {
+                  setShow(!show);
+                }}
+              >
+                <CurrencyDollarIcon className="h-5 group-hover:text-green-500" />
               </div>
+              <Modal show={show} onHide={() => setShow(false)}>
+                <Modal.Header closeButton></Modal.Header>
+
+                <Modal.Body>
+                  <SendTransaction />
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button variant="secondary" onClick={() => setShow(false)}>
+                    Close
+                  </Button>
+                </Modal.Footer>
+              </Modal>
             </div>
           )}
 
@@ -171,7 +193,12 @@ function Post({ id, author, img, content, timestamp, postPage }) {
               likePost();
             }}
           >
-            <div className="icon group-hover:bg-pink-600/10">
+            <div
+              className="icon group-hover:bg-pink-600/10"
+              onClick={() => {
+                setLiked(!liked);
+              }}
+            >
               {liked ? (
                 <HeartIconFilled className="h-5 text-pink-600" />
               ) : (
@@ -184,7 +211,7 @@ function Post({ id, author, img, content, timestamp, postPage }) {
                   liked && "text-pink-600"
                 }`}
               >
-                {likes.length}
+                {likeCount}
               </span>
             )}
           </div>
@@ -193,10 +220,7 @@ function Post({ id, author, img, content, timestamp, postPage }) {
             <ShareIcon className="h-5 group-hover:text-[#1d9bf0]" />
           </div>
           <div className="icon group">
-            <CreditCardIcon
-              className="h-5 group-hover:text-[#1d9bf0]"
-              onClick={mint}
-            />
+            <CreditCardIcon className="h-5 group-hover:text-[#1d9bf0]" />
           </div>
         </div>
       </div>

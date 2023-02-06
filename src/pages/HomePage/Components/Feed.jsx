@@ -1,7 +1,7 @@
 import { SparklesIcon } from "@heroicons/react/24/outline";
 import React from "react";
 import Input from "./Input";
-// import Post from "../Components/Post";
+import Post from "../../../Components/Post";
 
 export default function Feed() {
   const posts = [
@@ -10,8 +10,8 @@ export default function Feed() {
       author: "Alpha",
       content:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, sit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quis consequatur rem! Eos reiciendis eveniet optio qui at velit aperiam.",
-      timestamp: "17 July, 2022",
-      img: "/vercel.svg",
+      timestamp: "1675667200",
+      img: "https://media.wired.com/photos/598e35fb99d76447c4eb1f28/16:9/w_2123,h_1194,c_limit/phonepicutres-TA.jpg",
     },
     {
       id: 1,
@@ -32,7 +32,7 @@ export default function Feed() {
       </div>
 
       <Input />
-      {/* <div className="pb-72">
+      <div className="pb-72">
         {posts?.map((post) => (
           <Post
             key={post.id}
@@ -42,9 +42,10 @@ export default function Feed() {
             img={post.img}
             timestamp={post.timestamp}
             postPage={true}
+            contractAddress="test"
           />
         ))}
-      </div> */}
+      </div>
     </div>
   );
 }

@@ -10,11 +10,16 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.0.14",
+    "@lighthouse-web3/sdk": "^0.1.12",
+    "axios": "^1.3.2",
     "connectkit": "^1.1.3",
     "ethers": "^5.7.2",
     "react": "^18.2.0",
+    "react-bootstrap": "^2.7.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.8.0",
+    "react-toastify": "^9.1.1",
+    "use-debounce": "^9.0.3",
     "wagmi": "^0.10.15"
   },
   "devDependencies": {
