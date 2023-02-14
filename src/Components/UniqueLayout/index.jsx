@@ -1,7 +1,7 @@
 import React from "react";
 import Sidebar from "../Sidebar";
 
-const UniquePage = ({ children }) => {
+const UniqueLayout = ({ children }) => {
   return (
     <>
       <div className="w-screen flex justify-center bg-[#f1f1f1] min-h-screen">
@@ -16,4 +16,4 @@ const UniquePage = ({ children }) => {
   );
 };
 
-export default UniquePage;
+export default UniqueLayout;
