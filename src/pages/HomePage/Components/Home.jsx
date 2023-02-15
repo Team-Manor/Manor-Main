@@ -1,9 +1,14 @@
 import React, { useState } from "react";
+import Input from "./Input";
+import Posts from "./Posts";
 
 function Home() {
   return (
     <>
-      <div className="h-[full] bg-green-400">Home Page goes here</div>
+      <div className="w-full px-[34px]">
+        <Input />
+        <Posts />
+      </div>
     </>
   );
 }

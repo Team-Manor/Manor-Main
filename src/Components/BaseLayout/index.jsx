@@ -1,6 +1,7 @@
 import React from "react";
 import Sidebar from "../Sidebar";
 import Topbar from "../Topbar";
+import Suggestions from "../Suggestions";
 
 const BaseLayout = ({ mainComponent, rightComponent }) => {
   return (
@@ -18,7 +19,7 @@ const BaseLayout = ({ mainComponent, rightComponent }) => {
               {mainComponent}
             </div>
             <div className={` h-full ${rightComponent ? `w-[25%]` : `hidden`}`}>
-              {rightComponent}
+              <Suggestions />
             </div>
           </div>
         </div>

@@ -17,9 +17,10 @@ function SideBar() {
     { text: "Profile", icon: HomeModernIcon },
     { text: "More", icon: HomeModernIcon },
   ];
+
   return (
     <>
-      <div className="px-4 w-4/5 py-8 mb-6 rounded-[14px] flex flex-col items-center h-full bg-gray">
+      <div className="px-4 w-4/5 py-8 mb-6 rounded-[14px] flex flex-col items-center h-full bg-lilac">
         <div>
           {links.map((link, i) => (
             <Link
@@ -32,7 +33,7 @@ function SideBar() {
             </Link>
           ))}
         </div>
-        <button className="bg-primary text-white h-10 w-full rounded-[10px]">
+        <button className="bg-deepBlue text-white h-10 w-full rounded-[10px]">
           Connect Wallet
         </button>
         <div className="flex justify-around w-4/5 items-center mt-12">

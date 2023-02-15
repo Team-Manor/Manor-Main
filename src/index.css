@@ -18,16 +18,16 @@
 }
 
 @layer components {
-  .text-primary {
+  .text-deepBlue {
     @apply text-[#1713C2];
   }
-  .bg-primary {
+  .bg-deepBlue {
     @apply bg-[#1713C2];
   }
-  .bg-gray {
+  .bg-lilac {
     @apply bg-[#1713C2]/[.12];
   }
-  .border-primary {
+  .border-deepBlue {
     @apply border-[#1713C2];
   }
 }

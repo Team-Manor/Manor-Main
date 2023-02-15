@@ -15,9 +15,9 @@ function Topbar() {
           <div className="flex items-center">
             <input
               type="text"
-              className="focus-visible:outline-0 border rounded-lg h-12 border-primary"
+              className="focus-visible:outline-0 border rounded-lg h-12 border-deepBlue"
             />
-            <div className="bg-primary h-10 rounded-lg justify-center ml-2 w-8 flex items-center">
+            <div className="bg-deepBlue h-10 rounded-lg justify-center ml-2 w-8 flex items-center">
               <MagnifyingGlassIcon className="text-white h-6" />
             </div>
           </div>
