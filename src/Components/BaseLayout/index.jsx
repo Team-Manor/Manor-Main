@@ -1,18 +1,25 @@
 import React from "react";
 import Sidebar from "../Sidebar";
-import Suggestions from "../Suggestions";
+import Topbar from "../Topbar";
 
-const Page = ({ children }) => {
+const BaseLayout = ({ mainComponent, rightComponent }) => {
   return (
     <>
       <div className="w-screen flex justify-center bg-[#f1f1f1] min-h-screen">
-        <div className="flex w-[1320px] mx-auto">
-          <div className="w-[30%]">
-            <Sidebar />
+        <div className="w-[1320px] mx-auto">
+          <div className="w-full h-[10vh]">
+            <Topbar />
           </div>
-          <div className="w-2/5">{children}</div>
-          <div className="w-[30%]">
-            <Suggestions />
+          <div className="flex w-full min-h-[90vh] pt-[45px]">
+            <div className="w-[20%] h-full">
+              <Sidebar />
+            </div>
+            <div className={`h-full ${rightComponent ? `w-[55%]` : `w-[80%]`}`}>
+              {mainComponent}
+            </div>
+            <div className={` h-full ${rightComponent ? `w-[25%]` : `hidden`}`}>
+              {rightComponent}
+            </div>
           </div>
         </div>
       </div>
@@ -20,4 +27,4 @@ const Page = ({ children }) => {
   );
 };
 
-export default Page;
+export default BaseLayout;

@@ -155,7 +155,6 @@ function Input() {
               >
                 <XMarkIcon className="text-white h-5" />
               </div>
-
               <img
                 src={selectedFile}
                 alt=""
