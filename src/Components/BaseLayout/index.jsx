@@ -6,7 +6,7 @@ import Suggestions from "../Suggestions";
 const BaseLayout = ({ mainComponent, rightComponent }) => {
   return (
     <>
-      <div className="w-screen flex justify-center bg-[#f1f1f1] min-h-screen">
+      <div className="w-screen max-w-full flex justify-center bg-[#f1f1f1] min-h-screen">
         <div className="w-[1320px] mx-auto">
           <div className="w-full h-[10vh]">
             <Topbar />
