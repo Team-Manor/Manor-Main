@@ -3,10 +3,14 @@ import {
   Cog6ToothIcon,
   QuestionMarkCircleIcon,
 } from "@heroicons/react/24/solid";
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 function SideBar() {
+  useEffect(() => {
+    document.body.style.overflowX = "clip";
+  }, []);
+
   const links = [
     { text: "Home", icon: HomeModernIcon },
     { text: "Explore", icon: HomeModernIcon },
