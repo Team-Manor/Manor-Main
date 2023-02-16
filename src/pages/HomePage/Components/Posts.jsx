@@ -18,10 +18,12 @@ function Posts() {
   return (
     <>
       <div className="w-full pt-[59px]">
-        <header className="font-semibold text-[#000000] opacity-[0.5] text-[20px] text-center w-full">
+        <header className="font-semibold text-[#000000] opacity-[0.5] text-[20px] text-center w-full mb-[47px]">
           Top Posts
         </header>
-        <section>{/* <Post /> */}</section>
+        <section>
+          <Post />
+        </section>
       </div>
     </>
   );
