@@ -6,18 +6,15 @@ import {
   SaveIcon,
   DonateIcon,
 } from "../../../assets/Icons";
-import { AppContext } from "../../../context/AppContext";
-
-function PostDetails({ props }) {
-  const { likePost, commentPost, address } = useContext(AppContext);
 
 
-  const like = () => {
-    console.log("fired");
+function PostDetails({ postLikes, postComments }) {
+  const likePost = () => {
+    console.log("like post");
   };
 
-  const comment = () => {
-    console.log("comment");
+  const commentPost = () => {
+    console.log("comment post");
   };
 
   const donate = () => {
@@ -34,12 +31,12 @@ function PostDetails({ props }) {
         <div className="flex gap-[10px] items-center">
           <MediaDetail
             icon={<LikeIcon />}
-            text={`552 Likes`}
+            text={`${postLikes} Likes`}
             execute={likePost}
           />
           <MediaDetail
             icon={<CommentIcon />}
-            text={`55 Comments`}
+            text={`${postComments} Comments`}
             execute={commentPost}
           />
           <MediaDetail icon={<DonateIcon />} text={`Donate`} execute={donate} />

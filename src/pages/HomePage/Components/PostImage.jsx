@@ -5,7 +5,7 @@ import dummy3 from "../../../assets/images/3.png";
 import dummy4 from "../../../assets/images/4.png";
 import dummy5 from "../../../assets/images/5.png";
 
-function PostImage({ props }) {
+function PostImage({ postImage }) {
   const imageArray = [1, 2, 3];
 
   return (
@@ -20,7 +20,7 @@ function PostImage({ props }) {
               className="h-auto w-[75%] rounded-[14px]"
             />
           ) : (
-            <div></div>
+            <></>
           )}
         </div>
         {/* double image */}
@@ -39,7 +39,7 @@ function PostImage({ props }) {
               />
             </div>
           ) : (
-            <div></div>
+            <></>
           )}
         </div>
         {/* triple image */}
@@ -65,7 +65,7 @@ function PostImage({ props }) {
               </div>
             </div>
           ) : (
-            <div></div>
+            <></>
           )}
         </div>
       </section>

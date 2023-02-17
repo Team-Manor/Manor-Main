@@ -6,11 +6,16 @@ import {
   GifIcon,
   EmojiIcon,
   CalendarIcon,
+  BackIcon,
 } from "../../../assets/Icons";
 import { AppContext } from "../../../context/AppContext";
 import lighthouse from "@lighthouse-web3/sdk";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
 
 function Input() {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [NFTPrice, setNFTPrice] = useState(0);
   const [postText, setPostText] = useState("");
   const [contractAddress, setContractAddress] = useState("");
   const [postImage, setPostImage] = useState([]);
