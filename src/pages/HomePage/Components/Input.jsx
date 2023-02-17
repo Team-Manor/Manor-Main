@@ -52,7 +52,7 @@ function Input() {
         </div>
       </div>
       {modalOpen ? (
-        <div className="absolute w-screen h-screen bg-gray-300 opacity-90 left-0 top-0 z-10 flex justify-center items-center">
+        <div className="absolute w-screen h-screen backdrop-blur-[8px] left-0 top-0 z-10 flex justify-center items-center">
           <section className="w-[380px] h-[360px] bg-white z-20 rounded-[14px] flex flex-col">
             <div className="bg-lilac w-full rounded-t-[14px] px-[32px] py-[12px] flex items-center">
               <div
