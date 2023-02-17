@@ -15,6 +15,9 @@
   a {
     @apply font-semibold text-lg no-underline;
   }
+  h3 {
+    @apply font-semibold text-2xl;
+  }
 }
 
 @layer components {

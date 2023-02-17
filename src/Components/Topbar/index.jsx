@@ -10,12 +10,12 @@ function Topbar() {
           <p className="text-5xl mr-3">Manor</p>
           <img src={Logo} alt="logo" />
         </div>
-        <div className="min-w-[80%] flex justify-between items-center">
+        <div className="min-w-[80%] flex justify-between items-center mr-3">
           <p className="text-primary">Home</p>
-          <div className="flex items-center">
+          <div className="flex items-center min-w-[40%]">
             <input
               type="text"
-              className="focus-visible:outline-0 border rounded-lg h-12 border-deepBlue"
+              className="focus-visible:outline-0 border w-full px-3 rounded-lg h-12 border-deepBlue"
             />
             <div className="bg-deepBlue h-10 rounded-lg justify-center ml-2 w-8 flex items-center">
               <MagnifyingGlassIcon className="text-white h-6" />
