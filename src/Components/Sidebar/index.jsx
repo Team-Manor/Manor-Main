@@ -5,8 +5,12 @@ import {
 } from "@heroicons/react/24/solid";
 import React from "react";
 import { Link } from "react-router-dom";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { AppContext } from "../../context/AppContext";
+import { disconnect } from "@wagmi/core";
 
 function SideBar() {
+  const { isConnected } = React.useContext(AppContext);
   const links = [
     { text: "Home", icon: HomeModernIcon },
     { text: "Explore", icon: HomeModernIcon },
@@ -33,9 +37,21 @@ function SideBar() {
             </Link>
           ))}
         </div>
-        <button className="bg-deepBlue text-white h-10 w-full rounded-[10px]">
-          Connect Wallet
-        </button>
+
+        {isConnected ? (
+          <button
+            className="bg-deepBlue text-white h-10 w-full rounded-[10px]"
+            onClick={disconnect}
+          >
+            Disconnect
+          </button>
+        ) : (
+          <ConnectButton
+            chainStatus="none"
+            showBalance={false}
+            accountStatus="none"
+          />
+        )}
         <div className="flex justify-around w-4/5 items-center mt-12">
           <Cog6ToothIcon className="h-8" />
           <QuestionMarkCircleIcon className="h-8" />
