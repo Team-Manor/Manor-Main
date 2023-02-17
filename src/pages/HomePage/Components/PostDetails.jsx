@@ -7,14 +7,10 @@ import {
   DonateIcon,
 } from "../../../assets/Icons";
 import { AppContext } from "../../../context/AppContext";
-import { useContractInfiniteReads } from "wagmi";
-import { contract_address, contract_abi } from "../../../constants/constants";
 
 function PostDetails({ props }) {
-  const { likePost, commentPost, address, posts } = useContext(AppContext);
+  const { likePost, commentPost, address } = useContext(AppContext);
 
- 
-  console.log(posts);
 
   const like = () => {
     console.log("fired");
