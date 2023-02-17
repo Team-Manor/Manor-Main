@@ -1,8 +1,6 @@
 import React, { useRef, useState, useEffect, useContext } from "react";
 import PostImage from "./PostImage";
-import dummy1 from "../../../assets/images/1.png";
-import dummy2 from "../../../assets/images/2.png";
-import dummy3 from "../../../assets/images/3.png";
+import { AppContext } from "../../../context/AppContext";
 
 function PostBody({ props }) {
   const postText =

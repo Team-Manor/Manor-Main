@@ -28,7 +28,6 @@ function App() {
       publicProvider(),
     ]
   );
-  console.log(import.meta.env.VITE_ALCHEMY_ID);
 
   const { connectors } = getDefaultWallets({
     appName: "Manor",

@@ -27,12 +27,34 @@ const getAllPosts = async () => {
   return posts;
 };
 
+const likePost = async (id) => {
+  const tx = await contract.likePost(id);
+  await tx.wait();
+  console.log("Transaction successful");
+};
+
+const createComment = async (id, content) => {
+  const tx = await contract.createComment(id, content);
+  await tx.wait();
+  console.log("Transaction successful");
+};
 export const AppContextProvider = ({ children }) => {
   const { address, isConnected } = useAccount();
+  const [posts, setPosts] = useState([]);
+
+  const getPosts = async () => {
+    try {
+      const allPosts = await getAllPosts();
+      setPosts(allPosts);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   useEffect(() => {
     if (isConnected) {
       getContract();
+      getPosts();
     }
   }, [isConnected]);
 
@@ -43,6 +65,9 @@ export const AppContextProvider = ({ children }) => {
         isConnected,
         createPost,
         getAllPosts,
+        likePost,
+        createComment,
+        posts,
       }}
     >
       {children}
