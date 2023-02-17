@@ -8,6 +8,7 @@ import LikeIcon from "./LikeIcon";
 import DonateIcon from "./DonateIcon";
 import SaveIcon from "./SaveIcon";
 import CommentIcon from "./CommentIcon";
+import BackIcon from "./BackIcon";
 
 export {
   FilterIcon,
@@ -20,4 +21,5 @@ export {
   DonateIcon,
   SaveIcon,
   CommentIcon,
+  BackIcon,
 };

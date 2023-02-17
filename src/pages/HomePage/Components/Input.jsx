@@ -6,9 +6,14 @@ import {
   GifIcon,
   EmojiIcon,
   CalendarIcon,
+  BackIcon,
 } from "../../../assets/Icons";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
 
 function Input() {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [NFTPrice, setNFTPrice] = useState(0);
   const [postText, setPostText] = useState("");
 
   return (
@@ -23,7 +28,7 @@ function Input() {
             onChange={(e) => setPostText(e.target.value)}
           />
           <section className="flex gap-[13px]">
-            <div className={iconStyle}>
+            <div className={iconStyle} onClick={() => setModalOpen(true)}>
               <FilterIcon />
             </div>
             <div className={iconStyle}>
@@ -46,6 +51,53 @@ function Input() {
           </button>
         </div>
       </div>
+      {modalOpen ? (
+        <div className="absolute w-screen h-screen bg-gray-300 opacity-90 left-0 top-0 z-10 flex justify-center items-center">
+          <section className="w-[380px] h-[360px] bg-white z-20 rounded-[14px] flex flex-col">
+            <div className="bg-lilac w-full rounded-t-[14px] px-[32px] py-[12px] flex items-center">
+              <div
+                onClick={() => setModalOpen(false)}
+                className="cursor-pointer"
+              >
+                <BackIcon />
+              </div>
+              <p className="text-deepBlue w-full text-center">Upload an NFT</p>
+            </div>
+            <div className="flex-grow flex flex-col justify-center items-center">
+              <p className="text-black text-[14px] font-normal">Set price</p>
+              <input
+                onChange={(e) => setNFTPrice(e.target.value)}
+                type="text"
+                placeholder="enter amount..."
+                className="border-2 border-black rounded-[14px] w-[260px] h-[46px] bg-white text-black text-[14px] font-normal mb-[16px] text-center"
+              />
+              <button
+                onClick={() => {
+                  setModalOpen(false);
+                  toast.success(`NFT price set to ${NFTPrice}`);
+                }}
+                className="bg-deepBlue px-[35px] h-[46px] text-white font-semibold text-[15px] rounded-[14px]"
+              >
+                Set
+              </button>
+            </div>
+          </section>
+        </div>
+      ) : (
+        <></>
+      )}
+      <ToastContainer
+        position="bottom-center"
+        autoClose={5000}
+        hideProgressBar={true}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </>
   );
 }

@@ -20,7 +20,7 @@ function PostImage({ props }) {
               className="h-auto w-[75%] rounded-[14px]"
             />
           ) : (
-            <div></div>
+            <></>
           )}
         </div>
         {/* double image */}
@@ -39,7 +39,7 @@ function PostImage({ props }) {
               />
             </div>
           ) : (
-            <div></div>
+            <></>
           )}
         </div>
         {/* triple image */}
@@ -65,7 +65,7 @@ function PostImage({ props }) {
               </div>
             </div>
           ) : (
-            <div></div>
+            <></>
           )}
         </div>
       </section>
