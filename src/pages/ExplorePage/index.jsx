@@ -5,7 +5,11 @@ import Explore from "./Components/Explore";
 function ExplorePage() {
   return (
     <>
-      <BaseLayout mainComponent={<Explore />} rightComponent={false} />
+      <BaseLayout
+        mainComponent={<Explore />}
+        activePage="Explore"
+        rightComponent={false}
+      />
     </>
   );
 }

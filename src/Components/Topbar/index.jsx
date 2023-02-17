@@ -2,7 +2,7 @@ import React from "react";
 import Logo from "../../assets/logo.png";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 
-function Topbar() {
+function Topbar({ activePage }) {
   return (
     <>
       <div className="p-2 pt-6 w-full h-full flex items-center justify-between">
@@ -11,7 +11,7 @@ function Topbar() {
           <img src={Logo} alt="logo" />
         </div>
         <div className="min-w-[80%] flex justify-between items-center mr-3">
-          <p className="text-primary">Home</p>
+          <p className="text-deepBlue">{activePage}</p>
           <div className="flex items-center min-w-[40%]">
             <input
               type="text"
