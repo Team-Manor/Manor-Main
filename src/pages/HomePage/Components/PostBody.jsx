@@ -1,28 +1,34 @@
 import React, { useRef, useState, useEffect, useContext } from "react";
+import PostImage from "./PostImage";
 import dummy1 from "../../../assets/images/1.png";
 import dummy2 from "../../../assets/images/2.png";
 import dummy3 from "../../../assets/images/3.png";
 
 function PostBody({ props }) {
+  const postText =
+    "There are multiple ways to get the first N words from a String using Javascript. You can use regex in order to do that or you can also use split() function of Javascript. We will explain them one by one in this post.";
+
+  const formatPostText = (str, num) => {
+    if (num === 1) return str.split(" ").slice(0, 10).join(" ");
+    if (num === 2) return str.split(" ").slice(10, str.length).join(" ");
+  };
+
   return (
     <>
       <div className="">
         <section>
-          <p className={pStyle}>Can you hear that...?</p>
-          <p className={pStyle}>Something is moving closer...</p>
-          <p className={pStyle}>Some kind of flying machine...?</p>
+          <p className={`${pStyle} font-semibold`}>
+            {formatPostText(postText, 1)}
+          </p>
+          <p className={pStyle}>{formatPostText(postText, 2)}</p>
         </section>
-        <section className="flex w-full gap-[14px]">
-          <img src={dummy1} alt="" className="h-[] w-[] rounded-[14px]" />
-          <div className="flex flex-col w-full gap-[15px]">
-            <img src={dummy2} alt="" className="h-[] w-[] rounded-[14px]" />
-            <img src={dummy3} alt="" className="h-[] w-[] rounded-[14px]" />
-          </div>
+        <section className="w-full">
+          <PostImage />
         </section>
       </div>
     </>
   );
 }
-const pStyle = `font-normal text-[16px] my-[8px]`;
+const pStyle = `text-[16px] my-[8px] font-normal`;
 
 export default PostBody;

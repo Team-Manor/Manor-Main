@@ -5,7 +5,7 @@ import Posts from "./Posts";
 function Home() {
   return (
     <>
-      <div className="w-full px-[34px]">
+      <div className="w-full">
         <Input />
         <Posts />
       </div>

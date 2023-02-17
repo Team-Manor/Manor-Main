@@ -11,7 +11,7 @@ const BaseLayout = ({ mainComponent, rightComponent }) => {
           <div className="w-full h-[10vh]">
             <Topbar />
           </div>
-          <div className="flex w-full min-h-[90vh] pt-[45px]">
+          <div className="flex w-full min-h-[90vh] pt-[45px] gap-x-[32px]">
             <div className="w-[20%] h-full">
               <Sidebar />
             </div>

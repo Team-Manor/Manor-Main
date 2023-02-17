@@ -28,7 +28,7 @@ function SideBar() {
 
   return (
     <>
-      <div className="px-4 w-4/5 py-8 mb-6 rounded-[14px] flex flex-col items-center h-full bg-lilac">
+      <div className="w-full py-8 mb-6 rounded-[14px] flex flex-col items-center h-full bg-lilac">
         <div>
           {links.map((link, i) => (
             <Link
