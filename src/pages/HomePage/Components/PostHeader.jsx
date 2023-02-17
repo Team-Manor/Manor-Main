@@ -1,13 +1,21 @@
 import React, { useRef, useState, useEffect, useContext } from "react";
 import { OptionsIcon } from "../../../assets/Icons";
-
+import { AppContext } from "../../../context/AppContext";
 function PostHeader({ props }) {
+  const walletAddressFormatter = (str) => {
+    const begin = str.substring(0, 7);
+    const end = str.slice(-4);
+    return `${begin}****${end}`;
+  };
+
+  const { address } = useContext(AppContext);
+
   return (
     <>
       <div className="flex justify-between w-full">
         <div className="flex gap-[6px] items-center">
           <h2 className="font-semibold text-[#000000] text-[16px]">
-            0x79348****a028
+            {walletAddressFormatter(address)}
           </h2>
           <div className="w-[5px] h-[5px] bg-[#999270] rounded"></div>
           <h2 className="font-semibold text-[#999270] text-[16px]">9h ago</h2>
