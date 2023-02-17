@@ -7,13 +7,13 @@ import {
   DonateIcon,
 } from "../../../assets/Icons";
 
-function PostDetails({ props }) {
+function PostDetails({ postLikes, postComments }) {
   const likePost = () => {
-    console.log("fired");
+    console.log("like post");
   };
 
   const commentPost = () => {
-    console.log("comment");
+    console.log("comment post");
   };
 
   const donate = () => {
@@ -30,12 +30,12 @@ function PostDetails({ props }) {
         <div className="flex gap-[10px] items-center">
           <MediaDetail
             icon={<LikeIcon />}
-            text={`552 Likes`}
+            text={`${postLikes} Likes`}
             execute={likePost}
           />
           <MediaDetail
             icon={<CommentIcon />}
-            text={`55 Comments`}
+            text={`${postComments} Comments`}
             execute={commentPost}
           />
           <MediaDetail icon={<DonateIcon />} text={`Donate`} execute={donate} />

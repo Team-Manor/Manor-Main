@@ -5,7 +5,7 @@ import dummy3 from "../../../assets/images/3.png";
 import dummy4 from "../../../assets/images/4.png";
 import dummy5 from "../../../assets/images/5.png";
 
-function PostImage({ props }) {
+function PostImage({ postImage }) {
   const imageArray = [1, 2, 3];
 
   return (
