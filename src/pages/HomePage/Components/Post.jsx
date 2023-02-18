@@ -5,6 +5,9 @@ import PostBody from "./PostBody";
 import PostDetails from "./PostDetails";
 
 function Post({ singlePost }) {
+  const route = window.location.pathname.substring(0, 5);
+  const singlePostCall = route === "/post" ? true : false;
+
   return (
     <>
       <div className="flex gap-[15px] px-[29px] py-[29px] w-full rounded-[14px] shadow-custom">
@@ -17,6 +20,7 @@ function Post({ singlePost }) {
           <PostBody
             postText={singlePost.content}
             postImage={singlePost.image}
+            singlePostCall={singlePostCall}
           />
           <PostDetails
             postId={singlePost.postId}

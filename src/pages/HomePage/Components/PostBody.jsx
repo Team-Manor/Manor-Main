@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect, useContext } from "react";
 import PostImage from "./PostImage";
 import { AppContext } from "../../../context/AppContext";
 
-function PostBody({ postText, postImage }) {
+function PostBody({ postText, postImage, singlePostCall }) {
   const formatPostText = (str, num) => {
     if (num === 1) return str.split(" ").slice(0, 10).join(" ");
     if (num === 2) return str.split(" ").slice(10, str.length).join(" ");
@@ -19,7 +19,7 @@ function PostBody({ postText, postImage }) {
         </section>
         {postImage.length > 0 && (
           <section className="w-full">
-            <PostImage postImage={postImage} />
+            <PostImage postImage={postImage} singlePostCall={singlePostCall} />
           </section>
         )}
       </div>
