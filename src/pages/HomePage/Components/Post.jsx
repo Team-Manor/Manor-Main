@@ -5,6 +5,9 @@ import PostBody from "./PostBody";
 import PostDetails from "./PostDetails";
 
 function Post({ singlePost }) {
+  const route = window.location.pathname.substring(0, 5);
+  const singlePostCall = route === "/post" ? true : false;
+
   return (
     <>
       <div className="flex gap-[15px] px-[29px] py-[29px] w-full rounded-[14px] shadow-custom">
@@ -12,16 +15,19 @@ function Post({ singlePost }) {
         <div className="flex-grow">
           <PostHeader
             postAuthor={singlePost.author}
-            postTime={singlePost.timeStamp}
+            postTime={singlePost.timestamp}
           />
           <PostBody
             postText={singlePost.content}
             postImage={singlePost.image}
+            singlePostCall={singlePostCall}
           />
           <PostDetails
-            postLikes={singlePost.likeCount}
+            postId={singlePost.postId}
+            postLikes={singlePost.likes}
             postComments={singlePost.commentCount}
             postContractAddress={singlePost.contractAddress}
+            postAuthor={singlePost.author}
           />
         </div>
       </div>

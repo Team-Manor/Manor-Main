@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import ExplorePage from "./pages/ExplorePage";
+import SinglePostPage from "./pages/SinglePostPage";
 import { AppContextProvider } from "./context/AppContext";
 import "@rainbow-me/rainbowkit/styles.css";
 import { useEffect } from "react";
@@ -52,6 +53,7 @@ function App() {
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/explore" element={<ExplorePage />} />
+              <Route path="/post/:postId" element={<SinglePostPage />} />
             </Routes>
           </RainbowKitProvider>
         </WagmiConfig>

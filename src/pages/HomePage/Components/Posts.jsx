@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect, useContext } from "react";
 import Post from "./Post";
 import { AppContext } from "../../../context/AppContext";
+import { Link } from "react-router-dom";
 
 function Posts() {
   const { posts } = useContext(AppContext);
@@ -19,9 +20,9 @@ function Posts() {
           {posts?.map((post) => {
             return (
               <>
-                <div key={post.postId}>
+                <Link key={post.postId} to={`/post/${post.postId}`}>
                   <Post singlePost={post} />
-                </div>
+                </Link>
               </>
             );
           })}
