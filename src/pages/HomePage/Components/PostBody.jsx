@@ -2,10 +2,7 @@ import React, { useRef, useState, useEffect, useContext } from "react";
 import PostImage from "./PostImage";
 import { AppContext } from "../../../context/AppContext";
 
-function PostBody({ props }) {
-  const postText =
-    "There are multiple ways to get the first N words from a String using Javascript. You can use regex in order to do that or you can also use split() function of Javascript. We will explain them one by one in this post.";
-
+function PostBody({ postText, postImage }) {
   const formatPostText = (str, num) => {
     if (num === 1) return str.split(" ").slice(0, 10).join(" ");
     if (num === 2) return str.split(" ").slice(10, str.length).join(" ");
@@ -20,9 +17,11 @@ function PostBody({ props }) {
           </p>
           <p className={pStyle}>{formatPostText(postText, 2)}</p>
         </section>
-        <section className="w-full">
-          <PostImage />
-        </section>
+        {postImage.length > 0 && (
+          <section className="w-full">
+            <PostImage postImage={postImage} />
+          </section>
+        )}
       </div>
     </>
   );

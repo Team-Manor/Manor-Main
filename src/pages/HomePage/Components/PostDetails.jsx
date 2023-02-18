@@ -6,52 +6,43 @@ import {
   SaveIcon,
   DonateIcon,
 } from "../../../assets/Icons";
-import { AppContext } from "../../../context/AppContext";
-import { useContractInfiniteReads } from "wagmi";
-import { contract_address, contract_abi } from "../../../constants/constants";
 
-function PostDetails({ props }) {
-  const { likePost, commentPost, address, posts } = useContext(AppContext);
-
- 
-  console.log(posts);
-
-  const like = () => {
-    console.log("fired");
+function PostDetails({ postLikes, postComments, postContractAddress }) {
+  const likePost = () => {
+    console.log("like post");
   };
 
-  const comment = () => {
-    console.log("comment");
+  const commentPost = () => {
+    console.log("comment post");
   };
 
   const donate = () => {
     console.log("donate");
   };
 
-  const savePost = () => {
-    console.log("savePost");
-  };
-
   return (
     <>
       <div className="flex justify-between items-center mt-[16px]">
-        <div className="flex gap-[10px] items-center">
+        <div className="flex gap-[30px] items-center">
           <MediaDetail
             icon={<LikeIcon />}
-            text={`552 Likes`}
+            text={`${postLikes} `}
             execute={likePost}
           />
           <MediaDetail
             icon={<CommentIcon />}
-            text={`55 Comments`}
+            text={`${postComments}`}
             execute={commentPost}
           />
           <MediaDetail icon={<DonateIcon />} text={`Donate`} execute={donate} />
-          <MediaDetail icon={<SaveIcon />} text={`Saved`} execute={savePost} />
         </div>
-        <button className="bg-deepBlue px-[30px] py-[6px] rounded-[8px] text-[12px] text-white">
-          Mint
-        </button>
+        {postContractAddress.length ? (
+          <button className="bg-deepBlue px-[30px] py-[6px] rounded-[8px] text-[12px] text-white">
+            Mint
+          </button>
+        ) : (
+          <></>
+        )}
       </div>
     </>
   );

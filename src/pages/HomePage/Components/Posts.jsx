@@ -1,19 +1,13 @@
 import React, { useRef, useState, useEffect, useContext } from "react";
 import Post from "./Post";
+import { AppContext } from "../../../context/AppContext";
 
 function Posts() {
-  const postsArray = [
-    {
-      postId: 0,
-      content: "",
-      image: "",
-      author: "",
-      likeCount: 2,
-      commentCount: 4,
-      timeStamp: "",
-      contractAddress: "",
-    },
-  ];
+  const { posts } = useContext(AppContext);
+
+  useEffect(() => {
+    console.log(posts);
+  }, [posts]);
 
   return (
     <>
@@ -21,8 +15,16 @@ function Posts() {
         <header className="font-semibold text-[#000000] opacity-[0.5] text-[20px] text-center w-full mb-[47px]">
           Top Posts
         </header>
-        <section>
-          <Post />
+        <section className="flex flex-col-reverse gap-[36px]">
+          {posts?.map((post) => {
+            return (
+              <>
+                <div key={post.postId}>
+                  <Post singlePost={post} />
+                </div>
+              </>
+            );
+          })}
         </section>
       </div>
     </>
