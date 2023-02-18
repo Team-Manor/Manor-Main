@@ -38,6 +38,12 @@ const createComment = async (id, content) => {
   await tx.wait();
   console.log("Transaction successful");
 };
+
+const getPostComments = async (id) => {
+  const comments = await contract.getPostComments(id);
+  return comments;
+};
+
 export const AppContextProvider = ({ children }) => {
   const { address, isConnected } = useAccount();
   const [posts, setPosts] = useState([]);

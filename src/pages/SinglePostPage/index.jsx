@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import BaseLayout from "../../Components/BaseLayout";
 import Post from "../HomePage/Components/Post";
 import Lebron from "../../assets/images/5.png";
 import SinglePostTopBar from "./Components/SinglePostTopBar";
 import SinglePostCmments from "./Components/SinglePostComments";
+import { AppContext } from "../../context/AppContext";
 
 function SinglePostPage() {
   const [singlePostToDisplay, setSinglePostToDisplay] = useState([]);
+  const { posts } = useContext(AppContext);
+  console.log(posts);
   const post = {
     postId: 0,
     content:
@@ -47,19 +50,15 @@ function SinglePostPage() {
     console.log(route);
   };
 
-  const getAllPostsInContract = () => {
-    //wande to write logic here or something
-    return;
-  };
-
   const filterPosts = (allPostArray, correctPostId) => {
     return allPostArray.filter((post) => post.postId === correctPostId);
   };
 
   // useEffect(() => {
   //   const correctPostId = getPostId();
-  //   const allPosts = getAllPostsInContract(); //fetch the entire array of posts
+  //   const allPosts = posts; //fetch the entire array of posts
   //   const singlePostToDisplay = filterPosts(allPosts, correctPostId);
+  //   console.log(singlePostToDisplay);
   //   setSinglePostToDisplay(singlePostToDisplay);
   // }, []);
 
