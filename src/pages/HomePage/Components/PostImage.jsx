@@ -6,16 +6,14 @@ import dummy4 from "../../../assets/images/4.png";
 import dummy5 from "../../../assets/images/5.png";
 
 function PostImage({ postImage }) {
-  const imageArray = [1, 2, 3];
-
   return (
     <>
       <section className="w-full gap-[14px]">
         {/* single image */}
         <div className="w-full">
-          {imageArray.length === 1 ? (
+          {postImage.length === 1 ? (
             <img
-              src={dummy1}
+              src={`https://gateway.lighthouse.storage/ipfs/${postImage[0]}`}
               alt=""
               className="h-auto w-[75%] rounded-[14px]"
             />
@@ -25,15 +23,15 @@ function PostImage({ postImage }) {
         </div>
         {/* double image */}
         <div className="w-full">
-          {imageArray.length === 2 ? (
+          {postImage.length === 2 ? (
             <div className="flex w-full gap-[12px]">
               <img
-                src={dummy3}
+                src={`https://gateway.lighthouse.storage/ipfs/${postImage[0]}`}
                 alt=""
                 className="h-auto w-[50%] rounded-[14px]"
               />
               <img
-                src={dummy2}
+                src={`https://gateway.lighthouse.storage/ipfs/${postImage[1]}`}
                 alt=""
                 className="h-auto w-[50%] rounded-[14px]"
               />
@@ -44,21 +42,21 @@ function PostImage({ postImage }) {
         </div>
         {/* triple image */}
         <div className="">
-          {imageArray.length === 3 ? (
+          {postImage.length === 3 ? (
             <div className="flex w-full gap-[14px]">
               <img
-                src={dummy4}
+                src={`https://gateway.lighthouse.storage/ipfs/${postImage[0]}`}
                 alt=""
                 className="h-auto w-[60%] rounded-[14px]"
               />
               <div className="flex flex-col w-[40%] gap-[15px]">
                 <img
-                  src={dummy1}
+                  src={`https://gateway.lighthouse.storage/ipfs/${postImage[1]}`}
                   alt=""
                   className="h-auto w-full rounded-[14px]"
                 />
                 <img
-                  src={dummy5}
+                  src={`https://gateway.lighthouse.storage/ipfs/${postImage[2]}`}
                   alt=""
                   className="h-auto w-full rounded-[14px]"
                 />

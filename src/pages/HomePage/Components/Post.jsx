@@ -21,6 +21,7 @@ function Post({ singlePost }) {
           <PostDetails
             postLikes={singlePost.likeCount}
             postComments={singlePost.commentCount}
+            postContractAddress={singlePost.contractAddress}
           />
         </div>
       </div>

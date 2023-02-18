@@ -57,13 +57,15 @@ function Input() {
     try {
       setLoading(true);
       const post = await createPost(postText, postImage, contractAddress);
-      console.log(post);
+      toast.success("Post created successfully");
       setLoading(false);
       setContractAddress("");
       setPostText("");
       setPostImage([]);
+      setSelectedFile([]);
     } catch (err) {
       console.log(err);
+      toast.error("Something went wrong");
       setLoading(false);
     }
   };
@@ -89,21 +91,22 @@ function Input() {
               >
                 <GalleryIcon className="text-white h-5" />
               </div>
-
-              {selectedFile.map((file) => (
-                <img
-                  key={file}
-                  src={file}
-                  alt=""
-                  // change flex directton to row and add overflow-x-auto to parent div
-                  className="w-[100px] h-[100px] rounded-[14px] object-cover mr-[10px] mb-[10px] cursor-pointer hover:opacity-80 transition-opacity duration-200 ease-in-out transform hover:scale-105 hover:z-10 hover:shadow-lg hover:ring-2 hover:ring-offset-2 hover:ring-offset-[#15181c] hover:ring-[#1da1f2] hover:ring-opacity-50 hover:ring-offset-opacity-50 "
-                />
-              ))}
+              <div className="flex width full">
+                {selectedFile.map((file) => (
+                  <img
+                    key={file}
+                    src={file}
+                    alt=""
+                    // change flex directton to row and add overflow-x-auto to parent div
+                    className="w-[100px] h-[100px] rounded-[14px] object-cover mr-[10px] mb-[10px] cursor-pointer hover:opacity-80 transition-opacity duration-200 ease-in-out transform hover:scale-105 hover:z-10 hover:shadow-lg hover:ring-2 hover:ring-offset-2 hover:ring-offset-[#15181c] hover:ring-[#1da1f2] hover:ring-opacity-50 hover:ring-offset-opacity-50 "
+                  />
+                ))}
+              </div>
             </div>
           )}
           {!loading && (
             <section className="flex gap-[13px]">
-              <div className={iconStyle}>
+              <div className={iconStyle} onClick={() => setModalOpen(true)}>
                 <FilterIcon />
               </div>
               <div
@@ -144,6 +147,53 @@ function Input() {
           </button>
         </div>
       </div>
+      {modalOpen ? (
+        <div className="absolute w-screen h-screen backdrop-blur-[8px] left-0 top-0 z-10 flex justify-center items-center">
+          <section className="w-[380px] h-[360px] bg-white z-20 rounded-[14px] flex flex-col">
+            <div className="bg-lilac w-full rounded-t-[14px] px-[32px] py-[12px] flex items-center">
+              <div
+                onClick={() => setModalOpen(false)}
+                className="cursor-pointer"
+              >
+                <BackIcon />
+              </div>
+              <p className="text-deepBlue w-full text-center">Upload an NFT</p>
+            </div>
+            <div className="flex-grow flex flex-col justify-center items-center">
+              <p className="text-black text-[14px] font-normal">Set price</p>
+              <input
+                onChange={(e) => setNFTPrice(e.target.value)}
+                type="text"
+                placeholder="enter amount..."
+                className="border-2 border-black rounded-[14px] w-[260px] h-[46px] bg-white text-black text-[14px] font-normal mb-[16px] text-center"
+              />
+              <button
+                onClick={() => {
+                  setModalOpen(false);
+                  toast.success(`NFT price set to ${NFTPrice}`);
+                }}
+                className="bg-deepBlue px-[35px] h-[46px] text-white font-semibold text-[15px] rounded-[14px]"
+              >
+                Set
+              </button>
+            </div>
+          </section>
+        </div>
+      ) : (
+        <></>
+      )}
+      <ToastContainer
+        position="bottom-center"
+        autoClose={5000}
+        hideProgressBar={true}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </>
   );
 }

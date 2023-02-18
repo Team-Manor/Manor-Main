@@ -17,9 +17,11 @@ function PostBody({ postText, postImage }) {
           </p>
           <p className={pStyle}>{formatPostText(postText, 2)}</p>
         </section>
-        <section className="w-full">
-          <PostImage postImage={postImage} />
-        </section>
+        {postImage.length > 0 && (
+          <section className="w-full">
+            <PostImage postImage={postImage} />
+          </section>
+        )}
       </div>
     </>
   );

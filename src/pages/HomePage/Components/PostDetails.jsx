@@ -7,8 +7,7 @@ import {
   DonateIcon,
 } from "../../../assets/Icons";
 
-
-function PostDetails({ postLikes, postComments }) {
+function PostDetails({ postLikes, postComments, postContractAddress }) {
   const likePost = () => {
     console.log("like post");
   };
@@ -21,30 +20,29 @@ function PostDetails({ postLikes, postComments }) {
     console.log("donate");
   };
 
-  const savePost = () => {
-    console.log("savePost");
-  };
-
   return (
     <>
       <div className="flex justify-between items-center mt-[16px]">
-        <div className="flex gap-[10px] items-center">
+        <div className="flex gap-[30px] items-center">
           <MediaDetail
             icon={<LikeIcon />}
-            text={`${postLikes} Likes`}
+            text={`${postLikes} `}
             execute={likePost}
           />
           <MediaDetail
             icon={<CommentIcon />}
-            text={`${postComments} Comments`}
+            text={`${postComments}`}
             execute={commentPost}
           />
           <MediaDetail icon={<DonateIcon />} text={`Donate`} execute={donate} />
-          <MediaDetail icon={<SaveIcon />} text={`Saved`} execute={savePost} />
         </div>
-        <button className="bg-deepBlue px-[30px] py-[6px] rounded-[8px] text-[12px] text-white">
-          Mint
-        </button>
+        {postContractAddress.length ? (
+          <button className="bg-deepBlue px-[30px] py-[6px] rounded-[8px] text-[12px] text-white">
+            Mint
+          </button>
+        ) : (
+          <></>
+        )}
       </div>
     </>
   );
