@@ -12,16 +12,18 @@ function Post({ singlePost }) {
         <div className="flex-grow">
           <PostHeader
             postAuthor={singlePost.author}
-            postTime={singlePost.timeStamp}
+            postTime={singlePost.timestamp}
           />
           <PostBody
             postText={singlePost.content}
             postImage={singlePost.image}
           />
           <PostDetails
-            postLikes={singlePost.likeCount}
+            postId={singlePost.postId}
+            postLikes={singlePost.likes}
             postComments={singlePost.commentCount}
             postContractAddress={singlePost.contractAddress}
+            postAuthor={singlePost.author}
           />
         </div>
       </div>

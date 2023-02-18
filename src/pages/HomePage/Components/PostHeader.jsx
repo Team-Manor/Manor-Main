@@ -8,6 +8,29 @@ function PostHeader({ postAuthor, postTime }) {
     return `${begin}****${end}`;
   };
 
+  let time = "now";
+
+  const getTimestamp = async () => {
+    const date = new Date(postTime * 1000);
+    const today = new Date();
+
+    const diff = today - date;
+
+    const seconds = Math.floor(diff / 1000);
+
+    if (seconds < 60) {
+      time = `${seconds} seconds ago`;
+    } else if (seconds < 3600) {
+      time = `${Math.floor(seconds / 60)} minutes ago`;
+    } else if (seconds < 86400) {
+      time = `${Math.floor(seconds / 3600)} hours ago`;
+    } else {
+      time = `${Math.floor(seconds / 86400)} days ago`;
+    }
+  };
+
+  getTimestamp();
+
   return (
     <>
       <div className="flex justify-between w-full">
@@ -16,7 +39,7 @@ function PostHeader({ postAuthor, postTime }) {
             {walletAddressFormatter(postAuthor)}
           </h2>
           <div className="w-[5px] h-[5px] bg-[#999270] rounded"></div>
-          <h2 className="font-semibold text-[#999270] text-[16px]">{`${postTime} ago`}</h2>
+          <h2 className="font-semibold text-[#999270] text-[16px]">{`${time} ago`}</h2>
         </div>
         <div className="cursor-pointer">
           <OptionsIcon />
