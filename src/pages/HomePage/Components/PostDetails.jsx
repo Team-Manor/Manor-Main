@@ -29,7 +29,9 @@ function PostDetails({
   const [liked, setLiked] = useState(false);
 
   const [debouncedTo] = useDebounce(postAuthor, 500);
-  const [modalOpen, setModalOpen] = useState(false);
+  const [donateModalOpen, setDonateModalOpen] = useState(false);
+  const [commentModalOpen, setCommentModalOpen] = useState(false);
+  const [commentText, setCommentText] = useState("");
   const [NFTPrice, setNFTPrice] = useState("");
   const [debouncedAmount] = useDebounce(NFTPrice, 500);
 
@@ -50,7 +52,7 @@ function PostDetails({
       await likePost(postId);
       setLiked(!liked);
     } catch (err) {
-      console.log(err); 
+      console.log(err);
     }
   };
 
@@ -78,12 +80,12 @@ function PostDetails({
           <MediaDetail
             icon={<CommentIcon />}
             text={`${postComments}`}
-            execute={commentPost}
+            execute={() => setCommentModalOpen(true)}
           />
           <MediaDetail
             icon={<DonateIcon />}
             text={`Donate`}
-            execute={() => setModalOpen(true)}
+            execute={() => setDonateModalOpen(true)}
           />
         </div>
         {postContractAddress.length ? (
@@ -94,12 +96,12 @@ function PostDetails({
           <></>
         )}
       </div>
-      {modalOpen ? (
+      {donateModalOpen ? (
         <div className="absolute w-screen h-screen backdrop-blur-[8px] left-0 top-0 z-10 flex justify-center items-center">
           <section className="w-[380px] h-[360px] bg-white z-20 rounded-[14px] flex flex-col">
             <div className="bg-lilac w-full rounded-t-[14px] px-[32px] py-[12px] flex items-center">
               <div
-                onClick={() => setModalOpen(false)}
+                onClick={() => setDonateModalOpen(false)}
                 className="cursor-pointer"
               >
                 <BackIcon />
@@ -116,12 +118,50 @@ function PostDetails({
               />
               <button
                 onClick={() => {
-                  setModalOpen(false);
+                  setDonateModalOpen(false);
                   sendTransaction();
                 }}
                 className="bg-deepBlue px-[35px] h-[46px] text-white font-semibold text-[15px] rounded-[14px]"
               >
                 Donate
+              </button>
+            </div>
+          </section>
+        </div>
+      ) : (
+        <></>
+      )}
+      {commentModalOpen ? (
+        <div className="absolute w-screen h-screen backdrop-blur-[8px] left-0 top-0 z-10 flex justify-center items-center">
+          <section className="w-[380px] h-[360px] bg-white z-20 rounded-[14px] flex flex-col">
+            <div className="bg-lilac w-full rounded-t-[14px] px-[32px] py-[12px] flex items-center">
+              <div
+                onClick={() => setCommentModalOpen(false)}
+                className="cursor-pointer"
+              >
+                <BackIcon />
+              </div>
+              <p className="text-deepBlue w-full text-center">Comment</p>
+            </div>
+            <div className="flex-grow flex flex-col justify-center items-center">
+              <p className="text-black text-[14px] font-normal">
+                Type in your Comment
+              </p>
+              <textarea
+                onChange={(e) => setCommentText(e.target.value)}
+                type="text"
+                placeholder="type your comment"
+                siz
+                className="flexborder-2 border-black rounded-[14px] w-[260px] h-[150px] bg-white text-black text-[14px] font-normal mb-[16px] text-center resize-none"
+              />
+              <button
+                onClick={() => {
+                  setCommentModalOpen(false);
+                  // write function for making comments
+                }}
+                className="bg-deepBlue px-[35px] h-[46px] text-white font-semibold text-[15px] rounded-[14px]"
+              >
+                Comment
               </button>
             </div>
           </section>
