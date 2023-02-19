@@ -25,17 +25,17 @@ function SideBar() {
     { text: "Profile", icon: HomeModernIcon },
     { text: "More", icon: HomeModernIcon },
   ];
+  const getRoute = (str) => {
+    if (str === "Home") return `/`;
+    return `/${str.toLowerCase()}`;
+  };
 
   return (
     <>
       <div className="w-full py-8 mb-6 rounded-[14px] flex flex-col items-center h-full bg-lilac">
         <div>
           {links.map((link, i) => (
-            <Link
-              to={`/${link.text.toLowerCase()}`}
-              className="flex mb-5"
-              key={i}
-            >
+            <Link to={getRoute(link.text)} className="flex mb-5" key={i}>
               <link.icon className="h-6" />
               <p className="ml-2">{link.text}</p>
             </Link>
