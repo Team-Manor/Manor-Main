@@ -17,7 +17,9 @@ import {
   useWaitForTransaction,
 } from "wagmi";
 import { utils } from "ethers";
+import { nft_abi } from "../../../constants/constants";
 import { waitForTransaction } from "@wagmi/core";
+
 function PostDetails({
   postId,
   postLikes,
@@ -26,6 +28,7 @@ function PostDetails({
   postAuthor,
 }) {
   const { likePost, createComment } = useContext(AppContext);
+
   const [liked, setLiked] = useState(false);
 
   const [debouncedTo] = useDebounce(postAuthor, 500);
@@ -50,12 +53,30 @@ function PostDetails({
       await likePost(postId);
       setLiked(!liked);
     } catch (err) {
-      console.log(err); 
+      console.log(err);
     }
   };
 
   const commentPost = () => {
     console.log("comment post");
+  };
+
+  const mint = async () => {
+    try {
+      const providers = new ethers.providers.Web3Provider(window.ethereum);
+      const signer = providers.getSigner();
+      const contract = new ethers.Contract(
+        postContractAddress,
+        nft_abi,
+        signer
+      );
+      const tx = await contract.safeMint({ value: utils.parseEther("0.1") });
+      await tx.wait();
+      toast.success("Access Ticket Minted Successfully");
+    } catch (err) {
+      console.log(err);
+      toast.error("Access Ticket Minting Failed");
+    }
   };
 
   return (
@@ -87,7 +108,10 @@ function PostDetails({
           />
         </div>
         {postContractAddress.length ? (
-          <button className="bg-deepBlue px-[30px] py-[6px] rounded-[8px] text-[12px] text-white">
+          <button
+            className="bg-deepBlue px-[30px] py-[6px] rounded-[8px] text-[12px] text-white"
+            onClick={mint}
+          >
             Mint
           </button>
         ) : (

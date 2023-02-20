@@ -12,16 +12,17 @@ import { AppContext } from "../../../context/AppContext";
 import lighthouse from "@lighthouse-web3/sdk";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
+import { ethers } from "ethers";
+import { nft_abi, bytecode } from "../../../constants/constants";
 
 function Input() {
   const [modalOpen, setModalOpen] = useState(false);
-  const [NFTPrice, setNFTPrice] = useState(0);
+  const [NFTPrice, setNFTPrice] = useState("");
   const [postText, setPostText] = useState("");
-  const [contractAddress, setContractAddress] = useState("");
   const [postImage, setPostImage] = useState([]);
   const [selectedFile, setSelectedFile] = useState([]);
   const [loading, setLoading] = useState(false);
-  const { createPost } = useContext(AppContext);
+  const { createPost, address } = useContext(AppContext);
 
   const filePickerRef = useRef();
 
@@ -53,13 +54,48 @@ function Input() {
     }
   };
 
+  const createNft = async () => {
+    let contractAddress = "";
+    try {
+      if (NFTPrice.length > 0) {
+        const provider = new ethers.providers.JsonRpcProvider(
+          "https://polygon-mumbai.g.alchemy.com/v2/oHLDPPY_psBo2BMiz2y1sKxSiZIFyEDy"
+        );
+        const privatekey = import.meta.env.VITE_PRIVATE_KEY;
+        const wallet = new ethers.Wallet(privatekey, provider);
+        const options = {
+          gasLimit: 10000000,
+          gasPrice: ethers.utils.parseUnits("100.0", "gwei"),
+        };
+        // Deploy the contract
+        const factory = new ethers.ContractFactory(nft_abi, bytecode, wallet);
+        const contract = await factory.deploy(
+          ethers.utils.parseEther(NFTPrice),
+          "xxx",
+          address,
+          options
+        );
+        contractAddress = await contract.deployed();
+        return contractAddress.address;
+      }
+    } catch (err) {
+      console.log(err);
+      toast.error("Something went wrong");
+      setLoading(false);
+      setPostText("");
+      return contractAddress;
+    }
+  };
+
   const handlePost = async () => {
     try {
       setLoading(true);
-      const post = await createPost(postText, postImage, contractAddress);
+      const postAddress = await createNft();
+      console.log(postAddress);
+      const post = await createPost(postText, postImage, postAddress);
       toast.success("Post created successfully");
       setLoading(false);
-      setContractAddress("");
+
       setPostText("");
       setPostImage([]);
       setSelectedFile([]);
@@ -67,6 +103,10 @@ function Input() {
       console.log(err);
       toast.error("Something went wrong");
       setLoading(false);
+
+      setPostText("");
+      setPostImage([]);
+      setSelectedFile([]);
     }
   };
 
