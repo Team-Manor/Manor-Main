@@ -25,6 +25,7 @@ function Post({ singlePost }) {
             <PostHeader
               postAuthor={singlePost.author}
               postTime={singlePost.timestamp}
+              singlePostCall={singlePostCall}
             />
 
             <PostBody

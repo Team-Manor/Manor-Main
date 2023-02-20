@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect, useContext } from "react";
 import { OptionsIcon } from "../../../assets/Icons";
 
-function PostHeader({ postAuthor, postTime }) {
+function PostHeader({ postAuthor, postTime, singlePostCall }) {
   const walletAddressFormatter = (str) => {
     const begin = str.substring(0, 7);
     const end = str.slice(-4);
@@ -29,7 +29,7 @@ function PostHeader({ postAuthor, postTime }) {
     }
   };
 
-  getTimestamp();
+  if (!singlePostCall) getTimestamp();
 
   return (
     <>
@@ -39,7 +39,9 @@ function PostHeader({ postAuthor, postTime }) {
             {walletAddressFormatter(postAuthor)}
           </h2>
           <div className="w-[5px] h-[5px] bg-[#999270] rounded"></div>
-          <h2 className="font-semibold text-[#999270] text-[16px]">{`${time} ago`}</h2>
+          <h2 className="font-semibold text-[#999270] text-[16px]">{`${
+            singlePostCall ? postTime : time
+          }`}</h2>
         </div>
         <div className="cursor-pointer">
           <OptionsIcon />

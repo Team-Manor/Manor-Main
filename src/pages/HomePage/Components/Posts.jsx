@@ -6,7 +6,7 @@ function Posts() {
   const { posts } = useContext(AppContext);
 
   useEffect(() => {
-    console.log(posts);
+    console.log(posts[0]);
   }, [posts]);
 
   return (

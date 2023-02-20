@@ -5,11 +5,13 @@ import Lebron from "../../assets/images/5.png";
 import SinglePostTopBar from "./Components/SinglePostTopBar";
 import SinglePostCmments from "./Components/SinglePostComments";
 import { AppContext } from "../../context/AppContext";
+import { BigNumber } from "ethers";
 
 function SinglePostPage() {
-  const [singlePostToDisplay, setSinglePostToDisplay] = useState([]);
-  const { posts } = useContext(AppContext);
-  console.log(posts);
+  const [singlePostToDisplay, setSinglePostToDisplay] = useState({});
+  const [postComments, setPostComments] = useState([]);
+  const { getPostComments } = useContext(AppContext);
+
   const post = {
     postId: 0,
     content:
@@ -47,20 +49,70 @@ function SinglePostPage() {
       6,
       window.location.pathname.length
     );
-    console.log(route);
+    return route;
   };
 
   const filterPosts = (allPostArray, correctPostId) => {
-    return allPostArray.filter((post) => post.postId === correctPostId);
+    console.log(correctPostId);
+    return allPostArray.filter(
+      (post) => BigNumber.from(post[0]).toString() === correctPostId
+    );
   };
 
-  // useEffect(() => {
-  //   const correctPostId = getPostId();
-  //   const allPosts = posts; //fetch the entire array of posts
-  //   const singlePostToDisplay = filterPosts(allPosts, correctPostId);
-  //   console.log(singlePostToDisplay);
-  //   setSinglePostToDisplay(singlePostToDisplay);
-  // }, []);
+  useEffect(() => {
+    const correctPostId = getPostId();
+    const allPosts = JSON.parse(localStorage.getItem("allPosts"));
+    const xxxx = filterPosts(allPosts, correctPostId);
+    console.log(xxxx);
+    // setSinglePostToDisplay(xxxx[0]);
+    const personalObject = {
+      postId: BigNumber.from(xxxx[0][0]).toString(),
+      content: xxxx[0][1],
+      image: xxxx[0][2],
+      author: xxxx[0][3],
+      likes: BigNumber.from(xxxx[0][4]).toString(),
+      commentCount: BigNumber.from(xxxx[0][5]).toString(),
+      contractAddress: xxxx[0][6],
+      timestamp: getTimestamp(xxxx[0][7]),
+    };
+    setSinglePostToDisplay(personalObject);
+    console.log(personalObject);
+    console.log(singlePostToDisplay);
+
+    fetchComments(personalObject.postId);
+  }, []);
+
+  const getTimestamp = (postTime) => {
+    let time = "now";
+    const date = new Date(postTime * 1000);
+    const today = new Date();
+
+    const diff = today - date;
+
+    const seconds = Math.floor(diff / 1000);
+
+    if (seconds < 60) {
+      time = `${seconds} seconds ago`;
+    } else if (seconds < 3600) {
+      time = `${Math.floor(seconds / 60)} minutes ago`;
+    } else if (seconds < 86400) {
+      time = `${Math.floor(seconds / 3600)} hours ago`;
+    } else {
+      time = `${Math.floor(seconds / 86400)} days ago`;
+    }
+    console.log(postTime, time);
+    return time;
+  };
+
+  const fetchComments = async (id) => {
+    try {
+      const commentsXX = await getPostComments(id);
+      console.log(commentsXX);
+      setPostComments(commentsXX);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <>
@@ -68,19 +120,27 @@ function SinglePostPage() {
         mainComponent={
           <>
             <SinglePostTopBar />
-            <Post singlePost={post} />
-            <div className="flex flex-col-reverse gap-[12px] mt-[14px]">
-              {comments.map((comment) => {
-                return (
-                  <div key={comment.commentId}>
-                    <SinglePostCmments
-                      comment={comment}
-                      postAuthor={post.author}
-                    />
-                  </div>
-                );
-              })}
-            </div>
+            {!singlePostToDisplay.postId ? (
+              <>
+                <div>Loading Post</div>
+              </>
+            ) : (
+              <>
+                <Post singlePost={singlePostToDisplay} />
+                <div className="flex flex-col-reverse gap-[12px] mt-[14px]">
+                  {postComments.map((comment) => {
+                    return (
+                      <div key={comment.commentId}>
+                        <SinglePostCmments
+                          comment={comment}
+                          postAuthor={post.author}
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
+              </>
+            )}
           </>
         }
         rightComponent={true}
