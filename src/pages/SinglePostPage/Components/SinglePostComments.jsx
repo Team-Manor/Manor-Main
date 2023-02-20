@@ -10,6 +10,28 @@ function SinglePostCmments({ comment, postAuthor }) {
     return `${begin}****${end}`;
   };
 
+  const getTimestamp = (postTime) => {
+    let time = "now";
+    const date = new Date(postTime * 1000);
+    const today = new Date();
+
+    const diff = today - date;
+
+    const seconds = Math.floor(diff / 1000);
+
+    if (seconds < 60) {
+      time = `${seconds} seconds ago`;
+    } else if (seconds < 3600) {
+      time = `${Math.floor(seconds / 60)} minutes ago`;
+    } else if (seconds < 86400) {
+      time = `${Math.floor(seconds / 3600)} hours ago`;
+    } else {
+      time = `${Math.floor(seconds / 86400)} days ago`;
+    }
+    console.log(postTime, time);
+    return time;
+  };
+
   const likeComment = () => {
     console.log("click to like comment");
   };
@@ -25,7 +47,9 @@ function SinglePostCmments({ comment, postAuthor }) {
                 {walletAddressFormatter(comment.author)}
               </h2>
               <div className="w-[5px] h-[5px] bg-[#999270] rounded"></div>
-              <h2 className="font-semibold text-[#999270] text-[16px]">{`${comment.timeStamp} ago`}</h2>
+              <h2 className="font-semibold text-[#999270] text-[16px]">
+                {getTimestamp(comment.timestamp)}
+              </h2>
             </div>
             <p className="italic font-normal text-[#545151] text-[14px]">{`replying to @${postAuthor}`}</p>
           </div>

@@ -52,6 +52,7 @@ export const AppContextProvider = ({ children }) => {
     try {
       const allPosts = await getAllPosts();
       setPosts(allPosts);
+      localStorage.setItem("allPosts", JSON.stringify(allPosts));
     } catch (err) {
       console.log(err);
     }
@@ -74,6 +75,7 @@ export const AppContextProvider = ({ children }) => {
         likePost,
         createComment,
         posts,
+        getPostComments,
       }}
     >
       {children}
