@@ -26,11 +26,11 @@ function SideBar() {
     { text: "Home", icon: HomeIcon },
     { text: "Explore", icon: ExploreIcon },
     { text: "Subscriptions", icon: SubscriptionIcon },
-    { text: "LiveStreams", icon: LiveStreamIcon },
-    { text: "Messaging", icon: MessagingIcon },
+    { text: "LiveStreams", disabled: true, icon: LiveStreamIcon },
+    { text: "Messaging", disabled: true, icon: MessagingIcon },
     { text: "Notifications", icon: NotificationIcon },
-    { text: "Profile", icon: ProfileIcon },
-    { text: "More", icon: MoreIcon },
+    { text: "Profile", disabled: true, icon: ProfileIcon },
+    { text: "More", disabled: true, icon: MoreIcon },
   ];
 
   return (
@@ -40,9 +40,12 @@ function SideBar() {
           {links.map((link, i) => (
             <Link
               to={`/${link.text.toLowerCase()}`}
-              className="flex mb-5 items-center"
+              className={`${
+                link.disabled ? "cursor-not-allowed pointer-events-none" : ""
+              } flex mb-5 items-center`}
               key={i}
             >
+              {console.log(link.text, link.disabled)}
               <img src={link.icon} className="h-6 w-6" />
               <p className="ml-4">{link.text}</p>
             </Link>
