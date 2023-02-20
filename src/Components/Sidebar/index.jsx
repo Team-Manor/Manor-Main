@@ -43,7 +43,7 @@ function SideBar() {
         <div>
           {links.map((link, i) => (
             <Link
-              to={`/${link.text.toLowerCase()}`}
+              to={getRoute(link.text)}
               className={`${
                 link.disabled ? "cursor-not-allowed pointer-events-none" : ""
               } flex mb-5 items-center`}
