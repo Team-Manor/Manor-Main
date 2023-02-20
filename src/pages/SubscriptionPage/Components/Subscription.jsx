@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import AllSubscriptions from "./AllSubscriptions";
 import videoImage from "../../../assets/videoImage.png";
+import UploadVideo from "./UploadVideo";
 
 function Subscription() {
   const weekSubscriptions = [
@@ -39,6 +40,7 @@ function Subscription() {
   return (
     <>
       <div className="w-full flex flex-col gap-[44px]">
+        <UploadVideo />
         <AllSubscriptions timeSlot={"Week"} subscriptions={weekSubscriptions} />
         <AllSubscriptions
           timeSlot={"Month"}
