@@ -59,8 +59,15 @@ function PostDetails({
     }
   };
 
-  const commentPost = () => {
-    console.log("comment post");
+  const commentPost = async () => {
+    try {
+      await createComment(postId, commentText);
+      setCommentModalOpen(false);
+      toast.success("Commented Successfully");
+    } catch (err) {
+      console.log(err);
+      toast.error("Commenting Failed");
+    }
   };
 
   const mint = async () => {
@@ -181,7 +188,7 @@ function PostDetails({
               <button
                 onClick={() => {
                   setCommentModalOpen(false);
-                  // write function for making comments
+                  commentPost();
                 }}
                 className="bg-deepBlue px-[35px] h-[46px] text-white font-semibold text-[15px] rounded-[14px]"
               >
