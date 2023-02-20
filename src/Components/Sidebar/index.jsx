@@ -32,6 +32,10 @@ function SideBar() {
     { text: "Profile", disabled: true, icon: ProfileIcon },
     { text: "More", disabled: true, icon: MoreIcon },
   ];
+  const getRoute = (str) => {
+    if (str === "Home") return `/`;
+    return `/${str.toLowerCase()}`;
+  };
 
   return (
     <>

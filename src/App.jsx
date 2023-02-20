@@ -3,6 +3,7 @@ import HomePage from "./pages/HomePage";
 import ExplorePage from "./pages/ExplorePage";
 import NotificationPage from "./pages/NotificationPage";
 import SinglePostPage from "./pages/SinglePostPage";
+import SubscriptionPage from "./pages/SubscriptionPage";
 import { AppContextProvider } from "./context/AppContext";
 import "@rainbow-me/rainbowkit/styles.css";
 import { useEffect } from "react";
@@ -56,6 +57,7 @@ function App() {
               <Route path="/explore" element={<ExplorePage />} />
               <Route path="/notifications" element={<NotificationPage />} />
               <Route path="/post/:postId" element={<SinglePostPage />} />
+              <Route path="/subscriptions" element={<SubscriptionPage />} />
             </Routes>
           </RainbowKitProvider>
         </WagmiConfig>
