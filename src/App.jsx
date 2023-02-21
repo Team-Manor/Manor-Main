@@ -27,7 +27,9 @@ function App() {
   const { chains, provider } = configureChains(
     [mainnet, polygon, optimism, polygonMumbai],
     [
-      alchemyProvider({ apiKey: import.meta.env.VITE_ALCHEMY_ID }),
+      alchemyProvider({
+        apiKey: "5KDjAA4AsLn0LEiseL9UCUZu4lgR0IrY",
+      }),
       publicProvider(),
     ]
   );

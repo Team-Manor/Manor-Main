@@ -59,7 +59,7 @@ function Input() {
     try {
       if (NFTPrice.length > 0) {
         const provider = new ethers.providers.JsonRpcProvider(
-          "https://polygon-mumbai.g.alchemy.com/v2/oHLDPPY_psBo2BMiz2y1sKxSiZIFyEDy"
+          "https://polygon-mumbai.g.alchemy.com/v2/5KDjAA4AsLn0LEiseL9UCUZu4lgR0IrY"
         );
         const privatekey = import.meta.env.VITE_PRIVATE_KEY;
         const wallet = new ethers.Wallet(privatekey, provider);
@@ -78,6 +78,7 @@ function Input() {
         contractAddress = await contract.deployed();
         return contractAddress.address;
       }
+      return contractAddress;
     } catch (err) {
       console.log(err);
       toast.error("Something went wrong");
