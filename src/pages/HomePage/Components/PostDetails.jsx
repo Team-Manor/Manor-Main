@@ -6,6 +6,7 @@ import {
   SaveIcon,
   DonateIcon,
   BackIcon,
+  FilledLikeIcon,
 } from "../../../assets/Icons";
 import { AppContext } from "../../../context/AppContext";
 import { ethers } from "ethers";
@@ -94,7 +95,7 @@ function PostDetails({
         <div className="flex gap-[30px] items-center">
           {liked ? (
             <MediaDetail
-              icon={<LikeIcon />}
+              icon={<FilledLikeIcon />}
               text={`${postLikes} `}
               execute={like}
             />

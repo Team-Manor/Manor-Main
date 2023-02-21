@@ -10,6 +10,7 @@ import SaveIcon from "./SaveIcon";
 import CommentIcon from "./CommentIcon";
 import BackIcon from "./BackIcon";
 import AddIcon from "./AddIcon";
+import FilledLikeIcon from "./FilledLikeIcon";
 
 export {
   FilterIcon,
@@ -24,4 +25,5 @@ export {
   CommentIcon,
   BackIcon,
   AddIcon,
+  FilledLikeIcon,
 };
