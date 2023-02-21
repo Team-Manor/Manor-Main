@@ -28,6 +28,28 @@ function VideoContent({ subscription }) {
     balanceOf();
   }, []);
 
+  let time = "now";
+
+  const getTimestamp = async () => {
+    const date = new Date(subscription?.timestamp * 1000);
+    const today = new Date();
+
+    const diff = today - date;
+
+    const seconds = Math.floor(diff / 1000);
+
+    if (seconds < 60) {
+      time = `${seconds} seconds ago`;
+    } else if (seconds < 3600) {
+      time = `${Math.floor(seconds / 60)} minutes ago`;
+    } else if (seconds < 86400) {
+      time = `${Math.floor(seconds / 3600)} hours ago`;
+    } else {
+      time = `${Math.floor(seconds / 86400)} days ago`;
+    }
+  };
+
+  getTimestamp();
   const walletAddressFormatter = (str) => {
     const begin = str.substring(0, 7);
     const end = str.slice(-4);
@@ -59,9 +81,7 @@ function VideoContent({ subscription }) {
           <div className="flex gap-[4px] items-center">
             <h2 className="font-semibold text-gray-400 text-[14px]"></h2>
             <div className="w-[25px] h-[25px] text-gray-400 rounded-full"></div>
-            <h2 className="font-semibold text-gray-400 text-[14px]">
-              {subscription?.timestamp}
-            </h2>
+            <h2 className="font-semibold text-gray-400 text-[14px]">{time}</h2>
           </div>
         </div>
       ) : (
