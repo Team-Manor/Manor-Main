@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import BaseLayout from "../../Components/BaseLayout";
-import Notifications from "./Components/Notifications";
+import Notifications from "./components/Notifications";
 
 function NotificationsPage() {
   return (
