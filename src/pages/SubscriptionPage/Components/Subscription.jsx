@@ -2,8 +2,27 @@ import React, { useEffect, useState, useContext } from "react";
 import AllSubscriptions from "./AllSubscriptions";
 import videoImage from "../../../assets/videoImage.png";
 import UploadVideo from "./UploadVideo";
-
+import { ethers } from "ethers";
+import { video_abi, video_address } from "../../../constants/constants";
 function Subscription() {
+  const [videos, setVideos] = useState([]);
+  const getAllVideos = async () => {
+    try {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const signer = provider.getSigner();
+      const contract = new ethers.Contract(video_address, video_abi, signer);
+      const videos = await contract.getAllVideos();
+      setVideos(videos);
+      console.log(videos);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    getAllVideos();
+  }, []);
+
   const weekSubscriptions = [
     {
       img: videoImage,
@@ -41,11 +60,8 @@ function Subscription() {
     <>
       <div className="w-full flex flex-col gap-[44px]">
         <UploadVideo />
-        <AllSubscriptions timeSlot={"Week"} subscriptions={weekSubscriptions} />
-        <AllSubscriptions
-          timeSlot={"Month"}
-          subscriptions={monthSubscriptions}
-        />
+        <AllSubscriptions timeSlot={"Week"} subscriptions={videos} />
+        <AllSubscriptions timeSlot={"Month"} subscriptions={videos} />
       </div>
     </>
   );

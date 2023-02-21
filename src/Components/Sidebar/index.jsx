@@ -15,9 +15,10 @@ import { Link } from "react-router-dom";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { AppContext } from "../../context/AppContext";
 import { disconnect } from "@wagmi/core";
+import { useAccount } from "wagmi";
 
 function SideBar() {
-  const { isConnected } = React.useContext(AppContext);
+  const { isConnected } = useAccount();
   useEffect(() => {
     document.body.style.overflowX = "clip";
   }, []);
