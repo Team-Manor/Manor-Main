@@ -61,17 +61,19 @@ function VideoContent({ subscription }) {
     <>
       {bal ? (
         <div className="w-[22.5%]">
-          <video
-            src={`https://gateway.lighthouse.storage/ipfs/${subscription?.videoHash}`}
-            type="video/mp4"
-            controls
-            muted
-            autoPlay={"autoplay"}
-            preLoad="auto"
-            loop
-            alt=""
-            className="rounded-t-[14px] w-[full] h-auto mb-[9px]"
-          />
+          <div className="rounded-lg w-full aspect-[5/3]">
+            <video
+              src={`https://gateway.lighthouse.storage/ipfs/${subscription?.videoHash}`}
+              type="video/mp4"
+              controls
+              muted
+              autoPlay={"autoplay"}
+              preLoad="auto"
+              loop
+              alt=""
+              className="rounded-t-[14px] w-full object-cover object-center mb-[9px]"
+            />
+          </div>
           <h3 className="font-semibold text-[18px] leading-[23px] mb-[0]">
             {subscription?.title}
           </h3>
