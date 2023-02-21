@@ -9,6 +9,7 @@ import DonateIcon from "./DonateIcon";
 import SaveIcon from "./SaveIcon";
 import CommentIcon from "./CommentIcon";
 import BackIcon from "./BackIcon";
+import AddIcon from "./AddIcon";
 
 export {
   FilterIcon,
@@ -22,4 +23,5 @@ export {
   SaveIcon,
   CommentIcon,
   BackIcon,
+  AddIcon,
 };
